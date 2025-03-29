@@ -10,6 +10,6 @@ body,
   height: 100%;
   width: 100%;
   font-family: "Montserrat", sans-serif;
-  font-weight: 400px;
+  font-weight: 400;
   @apply text-gray-100;
 }

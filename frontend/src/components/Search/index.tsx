@@ -7,17 +7,32 @@ interface SearchProps {
 
 const Search = ({ termo }: SearchProps) => {
   const [resultados, setResultados] = useState<
-    { Produto: string; preco: string; loja: string }[]
+    {
+      Produtos?: string;
+      Produto?: string;
+      preco?: string;
+      Preco?: string;
+      loja?: string;
+      Loja?: string;
+    }[]
   >([]);
+
   const [loading, setLoading] = useState(false);
 
   // Função para buscar os dados na API
   const buscarDados = async (termo: string) => {
     if (termo.length > 1) {
-      // Só busca se o termo for maior que 1 caractere
       setLoading(true);
       const res = await search(termo);
-      setResultados(res.data);
+
+      // Normaliza os nomes das chaves
+      const dadosFormatados = res.data.map((item: any) => ({
+        Produtos: item.Produtos || "Desconhecido",
+        preco: item.Preco || "Preço indisponível",
+        loja: item.Loja || "Loja desconhecida",
+      }));
+
+      setResultados(dadosFormatados);
       setLoading(false);
     } else {
       setResultados([]);
@@ -41,7 +56,8 @@ const Search = ({ termo }: SearchProps) => {
             key={index}
             className="p-2 border-b hover:bg-gray-100 cursor-pointer"
           >
-            <strong>{item.Produto}</strong> - {item.preco} - {item.loja}
+            <strong>{item.Produtos}</strong> - {item.preco || item.Preco} -{" "}
+            {item.loja || item.Loja}
           </li>
         ))}
       </ul>
