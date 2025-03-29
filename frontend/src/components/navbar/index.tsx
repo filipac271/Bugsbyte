@@ -7,7 +7,7 @@ const Navbar = (props: Props) => {
   const flexBetween = "flex items-center justify-between";
   return (
     <nav>
-      <div className={`${flexBetween} fixed top-0 z-30 w-full py-5 bg-green-200`}>
+      <div className={`${flexBetween} sticky top-0 z-30 w-full py-5 bg-green-200`}>
         <div className={`${flexBetween} w-full gap-16`}>
         
           {/**Lado esquerdo-> Home */}
