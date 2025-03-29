@@ -3,3 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400px;
+  @apply text-gray-100;
+}
