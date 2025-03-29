@@ -1,12 +1,17 @@
-from fastapi import FastAPI
-from app.routes import dados
+from fastapi import FastAPI, Query
+import pandas as pd
 
 app = FastAPI()
 
-# Incluir as rotas
-app.include_router(dados.router)
+# Carregar os dados do CSV uma vez na memória
+df = pd.read_csv("dados.csv")
 
-# Mensagem de boas-vindas
-@app.get("/")
-def read_root():
-    return {"mensagem": "API está online! 🚀"}
+@app.get('/search')
+def search(q: str = Query(..., min_length=1)):
+    # Filtrar produtos pelo nome
+    resultados = df[df["Produto"].str.contains(q, case=False, na=False)]
+    
+    resultados = resultados.fillna("")  # Substitui NaN por strings vazias
+
+    # Converter para dicionário
+    return resultados.to_dict(orient="records")
