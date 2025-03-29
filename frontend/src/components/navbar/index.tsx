@@ -10,12 +10,14 @@ const Navbar = (props: Props) => {
   const flexBetween = "flex items-center justify-between";
   return (
     <nav>
+
       <div
         className={`${flexBetween} sticky top-0 z-30 w-full py-5 bg-green-200 `}
       >
         <div className={`${flexBetween} mx-auto w-11/12 `}>
           {/**Lado esquerdo-> Laf tale */}
           <div className={"${flexBetween}"}>
+
             {/**Vai ter a imagem aqui */}
             <Link to="/">
             <img alt="logo"

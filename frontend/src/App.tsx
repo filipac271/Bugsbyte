@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ModeProvider } from "./components/context/ModeContext";
 import Navbar from "./components/navbar";
@@ -5,8 +6,16 @@ import Home from "./pages/Home";
 import Cliente from "./pages/Cliente";
 import Empresa from "./pages/Empresa";
 
+
 function App() {
+  const [texto, setTexto] = useState<string>("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTexto(e.target.value);
+  };
+
   return (
+
     <ModeProvider>
       <Router>
         <Navbar />
@@ -17,6 +26,7 @@ function App() {
         </Routes>
       </Router>
     </ModeProvider>
+
   );
 }
 
