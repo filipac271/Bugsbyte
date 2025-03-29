@@ -9,6 +9,7 @@ export default {
       colors:{
         "primary-100": "#7ED957",
         "secondary-100": "#D2F2C4",
+        "gray-100": "#2F2F30"
       },
       fontFamily: {
         montserrat: ["Montserrat", "san-serif"],
