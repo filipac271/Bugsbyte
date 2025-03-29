@@ -30,7 +30,7 @@ const DadosTable: React.FC = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             {data.map((item, index) => (
               <tr key={index} className="hover:bg-gray-100">
                 {Object.values(item).map((value, i) => (
@@ -38,7 +38,7 @@ const DadosTable: React.FC = () => {
                 ))}
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
     </div>
