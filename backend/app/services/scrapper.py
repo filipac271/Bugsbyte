@@ -107,16 +107,20 @@ def getContinenteProduct(soup, category):
     return productsData
     
 
-def scrapeContinente (df):
-    print ("Starting to scrape Continente")
+def scrapeContinente():
+    print("Starting to scrape Continente")
     baseURL = "https://www.continente.pt/on/demandware.store/Sites-continente-Site/default/Search-UpdateGrid"
-    PAGE_SIZE = 36
-    
+    PAGE_SIZE = 36  
+    df = pd.DataFrame(columns=DATAFRAME_COLUMNS)
+
     for cat in CATEGORIES:
-        print ("starting the "+ cat + " category")
-        for categoryFilter in CATEGORIES_FILTER_CONTINENTE.get(cat, []):
+        print(f"Starting the {cat} category")
+        categoryFilters = CATEGORIES_FILTER_CONTINENTE.get(cat, [])
+
+        for categoryFilter in categoryFilters:
             start = 0
-            while True:         
+
+            while True:  
                 params = {
                     "cgid": categoryFilter, 
                     "pmin": "0.01", 
@@ -124,21 +128,25 @@ def scrapeContinente (df):
                     "sz": PAGE_SIZE
                 }
                 response = requests.get(baseURL, params=params)
-                print (response.url)
+                print(response.url)
+
                 if response.status_code != 200:
-                    print(f"Erro ao acessar à página {cat}: {response.status_code}")
+                    print(f"Error accessing {cat}: {response.status_code}")
                     break
-        
-                soup = BeautifulSoup (response.text, "html.parser")
-                prodData = getContinenteProduct (soup, cat)
-                
-                if len(prodData) == 0:
-                    print (f"No more products in {cat}, moving to next")
+
+                soup = BeautifulSoup(response.text, "html.parser")
+                prodData = getContinenteProduct(soup, cat)
+
+                if not prodData: 
+                    print(f"No more products in {cat}, moving to next")
                     break
+
                 new_rows = pd.DataFrame(prodData, columns=DATAFRAME_COLUMNS)
                 df = pd.concat([df, new_rows], ignore_index=True)
-                df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
-                start += PAGE_SIZE                                              
+
+                start += PAGE_SIZE  
+
+    df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
     return df
   
 
@@ -187,38 +195,51 @@ def getAuchanProduct(soup, category):
     return productsData
 
 
-def scrapeAuchan (df):
-    print ("Starting to scrape Auchan")
+
+def scrapeAuchan():
+    print("Starting to scrape Auchan")
     baseURL = "https://www.auchan.pt/on/demandware.store/Sites-AuchanPT-Site/pt_PT/Search-UpdateGrid"
+    PAGE_SIZE = 1000  
+    df = pd.DataFrame(columns=DATAFRAME_COLUMNS)
+
     for cat in CATEGORIES:
-        print ("starting the "+ cat + " category")
-        cgid = CATEGORIES_FILTER_AUCHAN.get(cat)
-        if cgid == None:
-            continue
-        params = {
-            "cgid": cgid,
-            "prefn1": "soldInStores",
-            "prefv1": "000",
-            "srule": "Best seller",
-            "start": 0,
-            "sz": 7000,
-            "next": "true"
-        }
-        response = requests.get(baseURL, params=params)
-        print (response.url)
-        if response.status_code != 200:
-            print(f"Erro ao acessar à página {cat}: {response.status_code}")
-            continue
-            
-        soup = BeautifulSoup (response.text, "html.parser")
-        prodData = getAuchanProduct (soup, cat)
-        new_rows = pd.DataFrame(prodData, columns=DATAFRAME_COLUMNS)
-        df = pd.concat([df, new_rows], ignore_index=True)
-        df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
+        print(f"Starting the {cat} category")
+        categoryFilters = CATEGORIES_FILTER_AUCHAN.get(cat, [])
 
+        for categoryFilter in categoryFilters:
+            start = 0
+
+            while True: 
+                params = {
+                    "cgid": categoryFilter,
+                    "prefn1": "soldInStores",
+                    "prefv1": "000",
+                    "srule": "Best seller",
+                    "start": start,
+                    "sz": PAGE_SIZE,
+                    "next": "true"
+                }
+                response = requests.get(baseURL, params=params)
+                print(response.url)
+
+                if response.status_code != 200:
+                    print(f"Error accessing {cat}: {response.status_code}")
+                    break
+
+                soup = BeautifulSoup(response.text, "html.parser")
+                prodData = getAuchanProduct(soup, cat)
+
+                if not prodData: 
+                    print(f"No more products in {cat}, moving to next")
+                    break
+
+                new_rows = pd.DataFrame(prodData, columns=DATAFRAME_COLUMNS)
+                df = pd.concat([df, new_rows], ignore_index=True)
+
+                start += PAGE_SIZE  
+
+    df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
     return df
-
-
 
 #pingo doce
 
@@ -245,17 +266,18 @@ def getPingoDoceProduct(soup, category):
     return productsData
     
 
-def scrapePingoDoce (df):
+def scrapePingoDoce ():
     print ("Starting to scrape Pingo Doce")
-    
+    df = pd.DataFrame (columns=DATAFRAME_COLUMNS)
+
     for cat in CATEGORIES:
         print ("starting the "+ cat + " category")
     
         start = 1
+        base_url = CATEGORIES_URL_PINGODOCE.get(cat)
+        if base_url == None:
+            continue
         while True: 
-            base_url = CATEGORIES_URL_PINGODOCE[cat]
-            if base_url == None:
-                continue
             url = base_url + str (start)
             
             response = requests.get(url)
@@ -270,19 +292,22 @@ def scrapePingoDoce (df):
             if len(prodData) == 0:
                 print (f"No more products in {cat}, moving to next")
                 break
+
             new_rows = pd.DataFrame(prodData, columns=DATAFRAME_COLUMNS)
             df = pd.concat([df, new_rows], ignore_index=True)
-            df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
-            start += 1                                             
+            start += 1 
+    df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)                                            
     return df
   
 
 
 
 # main
-df = pd.DataFrame(columns= DATAFRAME_COLUMNS)
-df = scrapeContinente (df)
-#df = scrapeAuchan (df)
-df = scrapePingoDoce(df)
+mainDf = pd.DataFrame(columns= DATAFRAME_COLUMNS)
 
+auchanDf = scrapeAuchan ()
+
+pingodoceDf = scrapePingoDoce()
+
+continenteDf = scrapeContinente ()
 
