@@ -8,11 +8,6 @@ import Empresa from "./pages/Empresa";
 
 
 function App() {
-  const [texto, setTexto] = useState<string>("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTexto(e.target.value);
-  };
 
   return (
 
