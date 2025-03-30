@@ -10,7 +10,7 @@ filepathPrice        = os.path.join(os.path.dirname(__file__), '..', '..', 'samp
 # MEDIAN
 
 def media(produto):
-    table = pd.read_csv("../../dados.csv")
+    table = pd.read_csv("dados.csv")
     table = table[table['Produtos'].apply(lambda x: str(x).lower().startswith(produto.lower()))].copy()
     
     table["preco_num"] = table['Preco'].apply(
