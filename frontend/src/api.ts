@@ -29,3 +29,9 @@ export async function unidades (termo:string){
   console.log("unidade:", uni);
   return uni.data;
 }
+
+export async function bundledesconto(termo:string) {
+  const bundle= await API.get(`/bundledesconto?q=${termo}`);
+  console.log("bundles:", bundle);
+  return bundle.data;
+}
