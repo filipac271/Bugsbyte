@@ -18,7 +18,7 @@ const Home = () => {
   };
 
   return (
-    <div className="justify-center bg-gray-50">
+    <div className="justify-center ">
       <div className="flex flex-row justify-center items-center">
         <img src='./euro.png' className="mt-[120px]" width="300" alt="Euro" />
       </div>
@@ -35,11 +35,10 @@ const Home = () => {
       </div>
 
       {/* Passando o valor do termo para o Search */}
-      <div className="flex justify-center mt-[40px]">
+      <div className="flex dark:bg-slate-800 justify-center mt-[40px] pb-7">
         <Search termo={texto} />
       </div>
 
-      <div className="text-center mt-5"></div>
     </div>
   );
 };
