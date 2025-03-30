@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd, json, re, os
+import pandas as pd, json, re
 
-DADOS_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'dados.csv')
+DADOS_PATH = "../../dados.csv"
 
 DATAFRAME_COLUMNS = ["Produto", "Preco", "Loja", "Marca", "Categoria"]
 
