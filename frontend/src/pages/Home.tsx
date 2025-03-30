@@ -46,9 +46,10 @@ const Home = () => {
 
 
       {/* Passando o valor do termo para o Search */}
-      <div className="flex justify-center mt-[40px]">
+      <div className="flex dark:bg-slate-800 justify-center mt-[40px] pb-7">
         <Search termo={texto} />
       </div>
+
 
       {/* Botão para abrir o pop-up */}
 
@@ -70,6 +71,7 @@ const Home = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

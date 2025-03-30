@@ -63,7 +63,7 @@ const Search = ({ termo }: SearchProps) => {
       {resultados.map((item, index) => (
         <div
           key={index}
-          className="flex justify-between border-b hover:bg-gray-100 cursor-pointer"
+          className="flex justify-between border-b hover:bg-secondary-50 cursor-pointer"
     >
         <div className="text-left w-2/5 pl-2"><strong>{item.Produtos}</strong></div>
         <div className="text-center w-1/4">{item.preco || item.Preco}</div>

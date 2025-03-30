@@ -9,8 +9,9 @@ export default {
     extend: {
       colors:{
         "primary-100": "#0CCD73",
-        "secondary-100": "#A5E2C4",
-        "gray-100": "#0101F63",
+        "secondary-100": "#7BD8AD",
+        "secondary-50": "#A3E6C7",
+        "gray-100": "#010F63",
         "gray-50": "#F0F0EB"
       },
       fontFamily: {
