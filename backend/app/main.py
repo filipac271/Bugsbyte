@@ -34,7 +34,7 @@ def search(q: str = Query(..., min_length=1)):
 @app.get('/novopreco')
 def novopreco(q: str = Query(..., min_length=1)):
     q = q.strip()  # Apenas remove espaços no início e no fim
-    preconovo = algorithm.main(q);
+    preconovo = algorithm.seasonal(q);
     return preconovo
 
 @app.get('/unidades')
