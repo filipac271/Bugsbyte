@@ -7,7 +7,7 @@ import itertools
 filepathTransactions = os.path.join(os.path.dirname(__file__), '..', '..', 'sample_sales_info_encripted.csv')
 filepathPrice        = os.path.join(os.path.dirname(__file__), '..', '..', 'sample_prod_info.csv')
 
-# MEDIUM
+# MEDIAN
 
 def media(produto):
     table = pd.read_csv("dados.csv")
@@ -71,6 +71,20 @@ def extrair_preco_com_un(preco: str):
     if match:
         return match.group(0)  # Retorna apenas a parte "€/Kg", "€/un", etc.
     return None   
+
+
+def bundleDiscount (product):
+    df = pd.read_csv(filepathTransactions)
+    filtered_df = df[df['product_dsc'].apply(lambda x: str(x).lower().startswith(product.lower()))]
+    if (filtered_df.empty == True):
+        qtdAverage = 1
+    else: 
+        qtdAverage = round (filtered_df['qty'].mean())
+    if qtdAverage == 1:
+        message = "Este produto é geralmente vendido por si mesmo, logo não é recomendado nenhum desconto bundle."
+    else:
+        message = "É recomendado fazer descontos de \"Compre 1, leve " + str(qtdAverage) + "\"."
+    return message
 
 def trending():
     df = pd.read_csv(filepathTransactions)
