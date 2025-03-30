@@ -59,7 +59,7 @@ const Search = ({ termo }: SearchProps) => {
       </div>
       )}
   
-    <ul className="bg-secondary-100 border rounded-md shadow-md">
+    <ul className="bg-secondary-100   rounded-md shadow-md">
       {resultados.map((item, index) => (
         <div
           key={index}
