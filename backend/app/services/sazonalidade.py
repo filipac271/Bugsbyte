@@ -8,11 +8,11 @@ def isBestSoldMonth(productName):
 
     for index, row in filtered_df.iterrows():
         date = str(row['time_key'])
-        month = date[4] + date[5]
-        if months[month]==0:
-            months[month]=1
+        month = int(date[4] + date[5])
+        if months[month-1]==0:
+            months[month-1]=1
         else:
-            months[month]=months[month]+1
+            months[month-1]=months[month-1]+1
 
     maxMonth = max(months)
     today = datetime.now()
