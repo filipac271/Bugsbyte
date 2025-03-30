@@ -64,4 +64,8 @@ def unidades(q: str = Query(..., min_length=1)):
 
     return precos_com_un
 
-
+@app.get('/bundledesconto')
+def bundledesconto (q: str = Query(..., min_length=1)):
+    q = q.strip();
+    bundle = algorithm.bundleDiscount(q);
+    return bundle
