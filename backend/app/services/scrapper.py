@@ -305,11 +305,9 @@ def scrapePingoDoce ():
 
 
 # main
-mainDf = pd.DataFrame(columns= DATAFRAME_COLUMNS)
 
-auchanDf = scrapeAuchan ()
-
-pingodoceDf = scrapePingoDoce()
-
-continenteDf = scrapeContinente ()
+def scrape ():
+    scrapeAuchan ()
+    scrapePingoDoce()
+    scrapeContinente ()
 
