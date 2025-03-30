@@ -18,8 +18,8 @@ const Home = () => {
   };
 
   return (
-    <div className="justify-center flex-items-center bg-gray-50">
-      <div className="flex flex-center justify-center items-center">
+    <div className="justify-center bg-gray-50">
+      <div className="flex flex-row justify-center items-center">
         <img src='./euro.png' className="mt-[120px]" width="300" alt="Euro" />
       </div>
 
@@ -40,11 +40,6 @@ const Home = () => {
       </div>
 
       <div className="text-center mt-5"></div>
-
-      {/* Mostrar o texto digitado */}
-      <div className="text-center mt-5">
-        <h2>Você digitou: {texto}</h2>
-      </div>
     </div>
   );
 };
