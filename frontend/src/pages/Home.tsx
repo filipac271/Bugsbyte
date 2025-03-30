@@ -18,7 +18,7 @@ const Home = () => {
   };
 
   return (
-    <div className="justify-center flex-items-center bg-gray-50">
+    <div className="justify-center flex-items-center ">
       <div className="flex flex-center justify-center items-center">
         <img src='./euro.png' className="mt-[120px]" width="300" alt="Euro" />
       </div>
