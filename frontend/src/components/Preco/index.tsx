@@ -18,7 +18,7 @@ const NovoPreco = ({ termo, setIsOpen }: Props) => {
         const preconew = await novopreco(termo);
         const uni = await unidades(termo);
         console.log(uni);
-        setResultado({ preco: preconew.toString() }); // Certifica-se de que `preco` é string
+        setResultado({ preco: preconew.toString() }); 
         setUnidade({ unidade: uni.toString() });
       } catch (error) {
         console.error("Erro ao buscar novo preço:", error);
@@ -47,7 +47,7 @@ const NovoPreco = ({ termo, setIsOpen }: Props) => {
           : "Sem dados"}
       </strong>
 
-      <p className="mt-2 dark:text-white">Texto bonitinho a falar do algoritmo</p>
+      <p className="mt-2 dark:text-white">Este valor é calculado através dos dados sazonais, isto é, quando um produto é mais popular, e altera o preço baseado nessa demanda.</p>
       <button
         onClick={() => setIsOpen(false)} // Agora fecha corretamente
         className="mt-4 px-4 py-2 bg-primary-100 text-black rounded-md hover:bg-secondary-50"

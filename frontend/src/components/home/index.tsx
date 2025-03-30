@@ -1,12 +1,8 @@
-import { useMode } from "../components/context/ModeContext";
-import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import Search from "../components/Search";
-import NovoPreco from "../components/Preco";
+import Search from "../Search";
+import NovoPreco from "../Preco";
 
 const Home = () => {
-  const { mode } = useMode();
-  const navigate = useNavigate();
   const [texto, setTexto] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -14,14 +10,10 @@ const Home = () => {
     setTexto(e.target.value);
   };
 
-  const handleSearch = () => {
-    navigate(`/${mode}`); // Redireciona com base no modo selecionado
-  };
-
   return (
     <div className="justify-center ">
       <div className="flex flex-row justify-center items-center">
-        <img src="./euro.png" className="mt-[120px]" width="300" alt="Euro" />
+        <img src="./euro.png" className="mt-[74px]" width="400" alt="Euro" />
       </div>
 
       {/* Campo de pesquisa */}
@@ -45,13 +37,11 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Passando o valor do termo para o Search */}
+      {/* Passar o valor do termo para o Search */}
       <div className="flex dark:bg-slate-800 justify-center mt-[40px] pb-7">
         <Search termo={texto} />
       </div>
-
-      {/* Botão para abrir o pop-up */}
-      {/* Pop-up (modal) */}
+    {/**Botao do pop up */}
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <NovoPreco termo={texto} setIsOpen={setIsOpen} />
