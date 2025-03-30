@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API, search } from "../../api";
+import { search } from "../../api";
 
 interface SearchProps {
   termo: string; // Recebendo o termo de busca como prop
@@ -25,7 +25,6 @@ const Search = ({ termo }: SearchProps) => {
       setLoading(true);
       const res = await search(termo);
 
-      // Normaliza os nomes das chaves
       const dadosFormatados = res.data.map((item: any) => ({
         Produtos: item.Produtos || "Desconhecido",
         preco: item.Preco || "Preço indisponível",
@@ -39,17 +38,15 @@ const Search = ({ termo }: SearchProps) => {
     }
   };
 
-  // Usando useEffect para buscar os dados sempre que o termo mudar
   useEffect(() => {
     buscarDados(termo);
   }, [termo]);
 
   return (
     <div>
-      {/* Indicador de carregamento */}
-      {loading && <p>Carregando...</p>}
+      {loading && <p>A carregar...</p>}
 
-      {/* Resultados da pesquisa */}
+      {/* Resultados  */}
       <div className="w-[1000px] mx-2">
         {termo.length > 0 && (
           <div className="flex justify-between bg-primary-100 border rounded-md font-bold">
