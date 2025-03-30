@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class', // Habilita o modo escuro baseado numa classe
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,9 +8,10 @@ export default {
   theme: {
     extend: {
       colors:{
-        "primary-100": "#7ED957",
-        "secondary-100": "#D2F2C4",
-        "gray-100": "#2F2F30"
+        "primary-100": "#0CCD73",
+        "secondary-100": "#A5E2C4",
+        "gray-100": "#0101F63",
+        "gray-50": "#F0F0EB"
       },
       fontFamily: {
         montserrat: ["Montserrat", "san-serif"],

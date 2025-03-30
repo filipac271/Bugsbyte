@@ -9,8 +9,8 @@ df = pd.read_csv("dados.csv")
 @app.get('/search')
 def search(q: str = Query(..., min_length=1)):
     # Filtrar produtos pelo nome
-    resultados = df[df["Produto"].str.contains(q, case=False, na=False)]
-    
+    resultados = df[df["Produtos"].str.match(rf"^{q}s?\b", case=False, na=False)]
+
     resultados = resultados.fillna("")  # Substitui NaN por strings vazias
 
     # Converter para dicionário

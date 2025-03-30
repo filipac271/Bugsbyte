@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd, json, re
+import pandas as pd, json, re, os
+
+DADOS_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'dados.csv')
 
 DATAFRAME_COLUMNS = ["Produto", "Preco", "Loja", "Marca", "Categoria"]
 
@@ -146,7 +148,7 @@ def scrapeContinente():
 
                 start += PAGE_SIZE  
 
-    df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
+    df.to_csv(DADOS_PATH, mode='a', index=False, encoding="utf-8", header=False)
     return df
   
 
@@ -238,7 +240,7 @@ def scrapeAuchan():
 
                 start += PAGE_SIZE  
 
-    df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)
+    df.to_csv(DADOS_PATH, mode='a', index=False, encoding="utf-8", header=False)
     return df
 
 #pingo doce
@@ -296,7 +298,7 @@ def scrapePingoDoce ():
             new_rows = pd.DataFrame(prodData, columns=DATAFRAME_COLUMNS)
             df = pd.concat([df, new_rows], ignore_index=True)
             start += 1 
-    df.to_csv("dados.csv", mode='a', index=False, encoding="utf-8", header=False)                                            
+    df.to_csv(DADOS_PATH, mode='a', index=False, encoding="utf-8", header=False)                                            
     return df
   
 
