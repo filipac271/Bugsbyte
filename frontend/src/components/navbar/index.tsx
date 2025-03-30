@@ -1,13 +1,10 @@
 import React from "react";
-
-import { useMode } from "../context/ModeContext";
 import { Link } from "react-router-dom";
 import DarkModeToggle from "../DarkModeToggle";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
-  const { mode, toggleMode } = useMode();
   const flexBetween = "flex items-center justify-between ";
   return (
     <nav>

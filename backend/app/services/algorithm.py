@@ -2,6 +2,7 @@ import pandas as pd, numpy as np
 import os
 from datetime import timedelta, datetime
 import re
+import itertools
 
 filepathTransactions = os.path.join(os.path.dirname(__file__), '..', '..', 'sample_sales_info_encripted.csv')
 filepathPrice        = os.path.join(os.path.dirname(__file__), '..', '..', 'sample_prod_info.csv')
@@ -69,7 +70,7 @@ def extrair_preco_com_un(preco: str):
     match = re.search(r"€/\w+", preco)
     if match:
         return match.group(0)  # Retorna apenas a parte "€/Kg", "€/un", etc.
-    return None
+    return None   
 
 
 def bundleDiscount (product):
@@ -85,13 +86,36 @@ def bundleDiscount (product):
         message = "É recomendado fazer descontos de \"Compre 1, leve " + str(qtdAverage) + "\"."
     return message
 
+def trending():
+    df = pd.read_csv(filepathTransactions)
     
-# main
-def main (product):
+    products = {}
+    i = -1
+    for _, row in df.iterrows():
+            if i==-1 or row['product_dsc'] != x:
+                x = row['product_dsc']
+                products.update({row['product_dsc'] : row['qty']})
+                i=0
+            elif row['product_dsc'] == x:
+                n = products[row['product_dsc']]
+                products.update({row['product_dsc'] : n + row['qty']})
+                
+    res = dict(sorted(products.items(), key=lambda item: item[1], reverse=True))
+
+    slicedDict = dict(itertools.islice(res.items(), 0 ,5)) 
+    message = "Estes são os produtos mais vendidos no Continente:\n"
+    message = message + ",".join(slicedDict.keys())
+    return message
+
+def seasonal (product):
     medium_price = media (product)
     print ("preço médio: "+ str(medium_price))
     fam = soldPerMonth (product)
-    print (str(fam))
-    ideal_price = algorithm (fam*600, medium_price)
+    #print (str(fam))
+    if not fam == 0:
+        ideal_price = algorithm (fam*600, medium_price)
+    else:
+        ideal_price = medium_price
+    
     #print ("The ideal price is "+ str(round(ideal_price, 2)))
     return (round(ideal_price, 2))
