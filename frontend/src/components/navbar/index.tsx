@@ -8,11 +8,11 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   const { mode, toggleMode } = useMode();
-  const flexBetween = "flex items-center justify-between";
+  const flexBetween = "flex items-center justify-between ";
   return (
     <nav>
       <div
-        className={`${flexBetween} sticky top-0 z-30 w-full py-5 bg-secondary-100`}
+        className={`${flexBetween} sticky top-0 z-30 w-full py-5 bg-secondary-100 dark:bg-secondary-200`}
       >
         <div className={`${flexBetween} mx-auto w-11/12 `}>
           {/**Lado esquerdo-> Laf tale */}

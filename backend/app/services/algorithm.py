@@ -1,7 +1,7 @@
 import pandas as pd, numpy as np
 import os
 from datetime import timedelta, datetime
-
+import re
 
 filepathTransactions = os.path.join(os.path.dirname(__file__), '..', '..', 'sample_sales_info_encripted.csv')
 filepathPrice        = os.path.join(os.path.dirname(__file__), '..', '..', 'sample_prod_info.csv')
@@ -9,7 +9,7 @@ filepathPrice        = os.path.join(os.path.dirname(__file__), '..', '..', 'samp
 # MEDIUM
 
 def media(produto):
-    table = pd.read_csv("../../dados.csv")
+    table = pd.read_csv("dados.csv")
     table = table[table['Produtos'].apply(lambda x: str(x).lower().startswith(produto.lower()))].copy()
     
     table["preco_num"] = table['Preco'].apply(
@@ -64,17 +64,23 @@ def algorithm(familiarity,preco):
     return f(familiarity,max_value,preco,-curvature,mid_value)
 
 
+def extrair_preco_com_un(preco: str):
+    # A expressão regular captura apenas a parte com o símbolo de euro e a unidade (exemplo: €/Kg)
+    match = re.search(r"€/\w+", preco)
+    if match:
+        return match.group(0)  # Retorna apenas a parte "€/Kg", "€/un", etc.
+    return None
 
     
 # main
-def main ():
-    product = input("Produto: ")
+def main (product):
     medium_price = media (product)
     print ("preço médio: "+ str(medium_price))
     fam = soldPerMonth (product)
     print (str(fam))
     ideal_price = algorithm (fam*600, medium_price)
-    print ("The ideal price is "+ str(round(ideal_price, 2)))
+    #print ("The ideal price is "+ str(round(ideal_price, 2)))
+    return (round(ideal_price, 2))
 
 
 if __name__ == "__main__":

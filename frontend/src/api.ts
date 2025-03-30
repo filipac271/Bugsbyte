@@ -17,3 +17,15 @@ export async function search(termo: string) {
   console.log("response: ", res); // Log the response to see if it's redirected to the wrong port
   return res;
 }
+
+export async function novopreco(termo:string) {
+  const preco = await API.get(`/novopreco?q=${termo}`);
+  console.log("preco:", preco);
+  return preco.data;
+}
+
+export async function unidades (termo:string){
+  const uni = await API.get(`/unidades?q=${termo}`);
+  console.log("unidade:", uni);
+  return uni.data;
+}
