@@ -51,30 +51,33 @@ const Search = ({ termo }: SearchProps) => {
 
       {/* Resultados da pesquisa */}
       <div className="w-[1000px] mx-2">
-      {termo.length > 0 && (
-        <div className="flex justify-between bg-primary-100 border rounded-md font-bold">
-        <div className="text-left w-2/5 pl-2">Produto</div>
-        <div className="text-center w-1/4">Preço</div>
-        <div className="text-right w-1/4 pr-2">Supermercado</div>
-      </div>
-      )}
-  
-    <ul className="bg-secondary-100   rounded-md shadow-md">
-      {resultados.map((item, index) => (
-        <div
-          key={index}
-          className="flex justify-between border-b hover:bg-secondary-50 cursor-pointer"
-    >
-        <div className="text-left w-2/5 pl-2"><strong>{item.Produtos}</strong></div>
-        <div className="text-center w-1/4">{item.preco || item.Preco}</div>
-        <div className="text-right w-1/4 pr-2">{item.loja || item.Loja}</div>
-      </div>
-    ))}
-    </ul>
-      </div>
+        {termo.length > 0 && (
+          <div className="flex justify-between bg-primary-100 border rounded-md font-bold">
+            <div className="text-left w-2/5 pl-2">Produto</div>
+            <div className="text-center w-1/4">Preço</div>
+            <div className="text-right w-1/4 pr-2">Supermercado</div>
+          </div>
+        )}
 
-
-
+        <ul className="bg-secondary-100   rounded-md shadow-md">
+          {resultados.map((item, index) => (
+            <div
+              key={index}
+              className="flex justify-between border-b hover:bg-secondary-50 cursor-pointer"
+            >
+              <div className="text-left w-2/5 pl-2">
+                <strong>{item.Produtos}</strong>
+              </div>
+              <div className="text-center w-1/4">
+                {item.preco || item.Preco}
+              </div>
+              <div className="text-right w-1/4 pr-2">
+                {item.loja || item.Loja}
+              </div>
+            </div>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

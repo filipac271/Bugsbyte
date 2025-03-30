@@ -11,6 +11,7 @@ export default {
         "primary-100": "#0CCD73",
         "secondary-100": "#7BD8AD",
         "secondary-50": "#A3E6C7",
+        "secondary-200": "#086639",
         "gray-100": "#010F63",
         "gray-50": "#F0F0EB"
       },
