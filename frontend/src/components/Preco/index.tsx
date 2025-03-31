@@ -9,7 +9,7 @@ type Props = {
 const NovoPreco = ({ termo, setIsOpen }: Props) => {
   const [resultado, setResultado] = useState<{ preco: string } | null>(null);
   const [unidade, setUnidade] = useState<{ unidade: string } | null>(null);
-  // const [bundledesc, setBundledesc] = useState<{ bundledesc: string } | null>(null);
+  const [bundledesc, setBundledesc] = useState<{ bundledesc: string } | null>(null);
   const [loading, setLoading] = useState(false);
 
   const buscarNovoPreco = async (termo: string) => {
@@ -21,7 +21,7 @@ const NovoPreco = ({ termo, setIsOpen }: Props) => {
         const bundle = await bundledesconto(termo);
         setResultado({ preco: preconew.toString() });
         setUnidade({ unidade: uni.toString() });
-        // setBundledesc({ bundledesc: bundle.toString() });
+        setBundledesc({ bundledesc: bundle.toString() });
       } catch (error) {
         console.error("Erro ao buscar novo preço:", error);
       }
@@ -29,7 +29,7 @@ const NovoPreco = ({ termo, setIsOpen }: Props) => {
     } else {
       setResultado(null);
       setUnidade(null);
-      // setBundledesc(null);
+      setBundledesc(null);
     }
   };
 
@@ -51,13 +51,13 @@ const NovoPreco = ({ termo, setIsOpen }: Props) => {
           ? `${resultado.preco} ${unidade.unidade}`
           : "Sem dados"}
       </strong>
-      {/* <p className="text-3xl dark:text-white">
+      <p className="text-xl dark:text-white">
         {loading
           ? "Carregando..."
           : bundledesc?.bundledesc
           ? `${bundledesc.bundledesc}`
           : "Sem dados"}
-      </p> */}
+      </p>
 
       <p className="mt-2 dark:text-white">
         Este valor é calculado através dos dados sazonais, isto é, quando um
